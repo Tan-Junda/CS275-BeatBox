@@ -17,6 +17,7 @@ public class BeatBox {
     private AssetManager mAssets;
     private List<Sound> mSounds = new ArrayList<>();
     private SoundPool mSoundPool;
+
     public BeatBox(Context context) {
         mAssets = context.getAssets();
         loadSounds();
@@ -31,7 +32,14 @@ public class BeatBox {
             Log.e(TAG, "Could not list asets", ioe);
             return;
         }
-
+        for (String filename : soundNames) {
+            String assetPath = SOUNDS_FOLDER + "/" + filename;
+            Sound sound = new Sound(assetPath);
+            mSounds.add(sound);
+        }
+    }
+    public List<Sound> getSounds() {
+        return mSounds;
     }
 
 //    private void load(Sound sound) throws IOException {
